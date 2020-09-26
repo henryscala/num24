@@ -20,6 +20,7 @@ function calculateExpr(expr:PExpr):TRational;
 function enumerateExpr2(r1,r2:PExpr;ops:array of char):TList;
 function rationalToExpr(r:TRational):TExpr;
 function exprToStr(expr:PExpr):String;
+function exprOfOp(r1,r2:PExpr;op:char): PExpr;
 procedure combination(n,r:integer;context:pointer;call:TIntArrayCallBack );
 implementation
 function exprOfOp(r1,r2:PExpr;op:char): PExpr;
