@@ -5,7 +5,7 @@ unit uexpr;
 interface
 
 uses
-  Classes, SysUtils, urational;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, urational;
 type
 
 TExprType = (etTerminal,etNonTerminal);
@@ -32,6 +32,7 @@ begin
   expr^.op:=op;
   expr^.expr1:=r1;
   expr^.expr2:=r2;
+
   result:=expr;
 end;
 
@@ -52,6 +53,7 @@ begin
   for i := low(ops) to high(ops) do begin
     case ops[i] of
       '+','*': begin
+
         expr := exprOfOp(r1,r2,ops[i]);
         result.Add(expr);
       end;
@@ -101,7 +103,7 @@ begin
   if expr^.exprType = etTerminal then begin
     result:=rationalToStr(expr^.rational);
   end else begin
-    result:=concat('(',exprToStr(expr^.expr1),expr^.op,exprToStr(expr^.expr1),')');
+    result:=concat('(',exprToStr(expr^.expr1),expr^.op,exprToStr(expr^.expr2),')');
   end;
 end;
 

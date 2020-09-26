@@ -12,7 +12,16 @@ type
 
   { TfrmNum24 }
 
+  { TInputOutputList }
 
+  TInputOutputList = class
+    public
+
+    inputList:TList;
+    outputList:TList;
+    constructor create;
+    destructor destroy;
+  end;
 
 
   TfrmNum24 = class(TForm)
@@ -42,6 +51,20 @@ implementation
 
 {$R *.lfm}
 
+{ TInputOutputList }
+
+constructor TInputOutputList.create;
+begin
+  inputList := TList.Create;
+  outputList := TList.Create;
+end;
+
+destructor TInputOutputList.destroy;
+begin
+  inputList.Free;
+  outputList.Free;
+end;
+
 { TfrmNum24 }
 
 procedure TfrmNum24.log( s:String);
@@ -61,11 +84,27 @@ procedure TfrmNum24.intArrayCallback(context:pointer;ary:array of integer);
 var
   s:string = '';
   i:integer;
+  ioList: TInputOutputList;
+  exprList: TList;
+  expr1,expr2:PExpr;
 begin
   for i:=low(ary) to high(ary) do begin
-      s := s + ' ' +intToStr(ary[i]);
+      s := s + intToStr(ary[i]);
   end;
   log(s);
+  ioList := TInputOutputList( context );
+  expr1 := PExpr(ioList.inputList.Items[ary[0]]);
+  expr2 := PExpr(ioList.inputList.Items[ary[1]]);
+  log('expr1:'+exprToStr(expr1));
+  log('expr2:'+exprToStr(expr2));
+  exprList := enumerateExpr2(expr1,expr2,fOps);
+  for i:=0 to exprList.Count-1 do begin
+    log('combined expr:'+exprToStr(PExpr(exprList.Items[i])));
+  end;
+
+  for i:=0 to exprList.Count-1 do begin
+    ioList.outputList.Add(exprList.Items[i]);
+  end;
 end;
 
 procedure TfrmNum24.btnCalculateClick(Sender: TObject);
@@ -73,6 +112,7 @@ var
   i:integer;
   exprList:TList;
   expr:PExpr;
+  ioList:TInputOutputList;
 begin
   fNums[1] := StrToInt(edtNum1.Text);
   fNums[2] := StrToInt(edtNum2.Text);
@@ -83,16 +123,17 @@ begin
   for i:=1 to NUMS_COUNT do begin
     fRationals[i] := intToRational(fNums[i]);
     fExprs[i] := rationalToExpr(fRationals[i]);
-    log(rationalToStr( fRationals[i] ) );
-    log(exprToStr(@fExprs[i]));
-  end;
-  exprList := enumerateExpr2(@fExprs[1],@fExprs[2],fOps);
-  for i:= 0 to exprList.Count-1 do begin
-    expr := exprList.Items[i];
-    log(exprToStr(expr));
   end;
 
-  combination(4,2,nil,@intArrayCallback);
+  ioList:=TInputOutputList.create;
+  for i:=1 to NUMS_COUNT do begin
+    ioList.inputList.Add(@fExprs[i]);
+  end;
+  combination(4,2,ioList,@intArrayCallback);
+  for i:=0 to ioList.outputList.Count-1 do begin
+    expr :=ioList.outputList.Items[i];
+    log(exprToStr(expr));
+  end;
 end;
 
 end.
