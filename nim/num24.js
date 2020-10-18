@@ -318,16 +318,6 @@ function subInt(a_1480437, b_1480438) {
 
   
 }
-function rawEcho() {
-          var buf = "";
-      for (var i = 0; i < arguments.length; ++i) {
-        buf += toJSStr(arguments[i]);
-      }
-      console.log(buf);
-    
-
-  
-}
 var globalRaiseHook_1377018 = [null];
 var localRaiseHook_1377023 = [null];
 var outOfMemHook_1377026 = [null];
@@ -712,7 +702,7 @@ function pointsGame_1872019(n_1872021, number_1872025, resultExp_1872029) {
 
 }
 function pointsGameWrapper(num1_1880031, num2_1880032, num3_1880033, num4_1880034) {
-  var result_1880035 = [];
+  var result_1880035 = null;
 
   var F={procname:"num24.pointsGameWrapper",prev:framePtr,filename:"c:\\temp\\num24\\nim\\num24.nim",line:0};
   framePtr = F;
@@ -725,16 +715,16 @@ function pointsGameWrapper(num1_1880031, num2_1880032, num3_1880033, num4_188003
     F.line = 81;
     nimCopy(number_1880038[0], [num1_1880031, num2_1880032, num3_1880033, num4_1880034], NTI1880043);
     F.line = 82;
-    nimCopy(resultExp_1880041[0], [cstrToNimstr((num1_1880031)+""), cstrToNimstr((num2_1880032)+""), cstrToNimstr((num3_1880033)+""), cstrToNimstr((num4_1880034)+"")], NTI1880045);
+    nimCopy(resultExp_1880041[0], [cstrToNimstr((((num1_1880031)|0))+""), cstrToNimstr((((num2_1880032)|0))+""), cstrToNimstr((((num3_1880033)|0))+""), cstrToNimstr((((num4_1880034)|0))+"")], NTI1880045);
     F.line = 83;
     res_1880042 = pointsGame_1872019(4, number_1880038[0], resultExp_1880041[0]);
     if (!(res_1880042)) {
     F.line = 85;
-    result_1880035 = nimCopy(null, [], NTI1208013);
+    result_1880035 = "";
     }
     else {
       F.line = 87;
-      result_1880035 = nimCopy(null, resultExp_1880041[0][chckIndx(0, 0, (resultExp_1880041[0]).length-1)], NTI1208013);
+      result_1880035 = toJSStr(resultExp_1880041[0][chckIndx(0, 0, (resultExp_1880041[0]).length-1)]);
     }
     
   framePtr = F.prev;
@@ -742,18 +732,6 @@ function pointsGameWrapper(num1_1880031, num2_1880032, num3_1880033, num4_188003
   return result_1880035;
 
 }
-var F={procname:"module num24",prev:framePtr,filename:"c:\\temp\\num24\\nim\\num24.nim",line:0};
-framePtr = F;
-framePtr = F.prev;
-var F={procname:"module num24",prev:framePtr,filename:"c:\\temp\\num24\\nim\\num24.nim",line:0};
-framePtr = F;
-F.line = 90;
-rawEcho(pointsGameWrapper(3, 4, 1, 2));
-F.line = 91;
-rawEcho(pointsGameWrapper(3, 3, 3, 7));
-F.line = 92;
-rawEcho(pointsGameWrapper(5, 5, 5, 1));
-framePtr = F.prev;
 var F={procname:"module num24",prev:framePtr,filename:"c:\\temp\\num24\\nim\\num24.nim",line:0};
 framePtr = F;
 framePtr = F.prev;

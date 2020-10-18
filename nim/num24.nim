@@ -73,7 +73,7 @@ proc pointsGame(n:int,number:var array[CardsNumber,float], resultExp:var array[C
   return false
 
 # if result is not found, result string is empty(not null); otherwise, the result is the expression
-proc pointsGameWrapper*(num1,num2,num3,num4:int):string {.exportc.} = 
+proc pointsGameWrapper*(num1,num2,num3,num4:cint):cstring {.exportc.} = 
   var 
     number:array[CardsNumber,float]
     resultExp:array[CardsNumber,string]
@@ -86,7 +86,7 @@ proc pointsGameWrapper*(num1,num2,num3,num4:int):string {.exportc.} =
   else:
     result = resultExp[0]
 
-when isMainModule:
-  echo pointsGameWrapper(3,4,1,2)
-  echo pointsGameWrapper(3,3,3,7)
-  echo pointsGameWrapper(5,5,5,1)
+#when isMainModule:
+  #echo pointsGameWrapper(3,4,1,2)
+  #echo pointsGameWrapper(3,3,3,7)
+  #echo pointsGameWrapper(5,5,5,1)

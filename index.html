@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="nim/num24.js"></script>
+<script>
+function calc(sender){
+    form = document.getElementById('num24');
+    num1 = form.num1.value;
+    num2 = form.num2.value;
+    num3 = form.num3.value;
+    num4 = form.num4.value;
+    result = pointsGameWrapper(num1,num2,num3,num4);
+    form.result.value = result; 
+};
+</script>
+
+</head>
+<body>
+<form id="num24">
+<p>num1:<input type="text" name="num1" size="20"></p>
+<p>num2:<input type="text" name="num2" size="20"></p>
+<p>num3:<input type="text" name="num3" size="20"></p>
+<p>num4:<input type="text" name="num4" size="20"></p>
+<p>result:<input type="text" name="result" size="20"></p>
+<input type="button" value="calculate" name="calculate" onclick="calc(this);">
+
+
+
+</form>
+</body>
+</html>
